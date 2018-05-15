@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28/05/2017, 19:41:10
+    Author     : Carlos Daniel
+*/
+
+#contatos input[type="submit"], #contatos input[type="reset"]{
+    border:0px;
+    width: 120px;
+    height:50px;
+    color:#FFF;
+    background:#060;
+    border-radius: 10px;
+    position:absolute;
+
+}
+
+.left-align { 
+    text-align: left;
+
+}
+
