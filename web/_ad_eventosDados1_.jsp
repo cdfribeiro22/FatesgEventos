@@ -1,7 +1,7 @@
 <%-- 
     Document   : cadastrar1
     Created on : 17/05/2017, 18:44:57
-    Author     : Gylles
+    Author     : Carlos Daniel
 --%>
 
 <%@page import="com.evento.model.CEventos"%>
