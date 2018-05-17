@@ -60,7 +60,16 @@ public class RegistroController extends HttpServlet {
             forward = "ad_eventolistarpresenca.jsp";
             request.setAttribute("participantes", daoP.getListParticipantes(QRvento));
             
-       
+      } else if (action.equalsIgnoreCase("listParticipantesMobile")) {            //Imprime Lista participantes apara mobile
+            System.out.println("Mobile");
+            String QRvento = request.getParameter("CodigoEvento");
+            
+            forward = "eventolistarpresencamobile.jsp";
+            request.setAttribute("participantes", daoP.getListParticipantes(QRvento));
+             request.setAttribute("nomeevento", daoE.getEventoById(QRvento).getDescevento());
+            
+ 
+              
         } else if (action.equalsIgnoreCase("registrarparticipante")) {
 //            System.out.println(request.getParameter("QREvento"));
             String QRvento = request.getParameter("QREvento");

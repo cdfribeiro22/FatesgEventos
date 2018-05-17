@@ -56,61 +56,35 @@
                 </div>
             </div>
         </section><!--/#title--> 
-
         <p></p>
-
-        <input class="btn btn-warning" type="button" onclick="location.href = 'EventosController?action=listEventosConsulta';" value="LISTAR" />
-        
-        <input class="btn btn-warning"  type="button" onclick="location.href = 'ad_eventocadastrar.jsp';" value="CADASTRAR NOVO EVENTO" />
-     
-        
+        <input class="btn btn-warning" type="button" onclick="location.href = 'EventosController?action=listEventosConsultaMobile';" value="ATUALIZAR" />
+        <!--       <input class="btn btn-warning"  type="button" onclick="location.href = 'ad_eventocadastrar.jsp';" value="CADASTRAR NOVO EVENTO" />
+        -->    
         <p></p>
-
-
-
         <!-- DADOS PESSOAIS-->
-
     <legend>Dados Eventos</legend>
-    <table  class="table table-striped table-bordered table-condensed table-hover">
-        <thead>
-            <tr align="center">
-                <th>Código </th>
-                <th>Descrição</th>
-                <th>Local</th>
-                <th>Sala/Auditorio</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Qrcode</th>
-                <th>Participantes Registrados</th>
-                <th><FONT COLOR="FF0000">Lista Participantes</th>
-                <th><FONT COLOR="0000FF">Imprimir QRCODE</th>
-
-                
-            </tr>    
-        </thead>        
-        <tbody>
-            <c:forEach items="${eventos}" var="evento">
-                <tr align="center">
-                    <td><c:out value="${evento.getCodigoevento()}" /></td>
-                    <td><c:out value="${evento.getDescevento()}" /></td>
-                    <td><c:out value="${evento.getLocalevento()}" /></td>
-                    <td><c:out value="${evento.getSala()}" /></td>
-                    <td><c:out value="${evento.getDataevento()}" /></td>
-                    <td><c:out value="${evento.getHoraevento()}:00" /></td>
-                    <td><c:out value="${evento.getQrcode()}" /></td>
-                    <td><c:out value="${evento.getQntparticipantes()}" /></td>
-                    <td><a href="RegistroController?action=listParticipantes&CodigoEvento=<c:out value="${evento.getQrcode()}"/>"><FONT COLOR="FF0000"><b>Listar</b></a></td>
-                    <td><a href="EventosController?action=imprime&CodigoEvento=<c:out value="${evento.getQrcode()}"/>"><FONT COLOR="0000FF"><b>Imprimir</b></a></td>
-                    
-
-                </tr>
-            </c:forEach>   
-        </tbody>   
-
-    </table>
-
+    <tbody>
+        <c:forEach items="${eventos}" var="evento">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="panel panel-success">
+                    <h4>Evento: <c:out value="${evento.getDescevento()}" /></h4>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-6">
+                        <div class="alert alert-success">
+                            Qnt. Participantes: <c:out value="${evento.getQntparticipantes()}" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        <div class="alert alert-success">
+                            <a href="RegistroController?action=listParticipantesMobile&CodigoEvento=<c:out value="${evento.getQrcode()}"/>"><b>Listar</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:forEach>   
     <br />
-    
-
 </body>
 </html>

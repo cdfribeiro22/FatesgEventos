@@ -25,9 +25,9 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="./">Inicio</a></li>                        
-                            <%  String Str = new String("admin@eventos.com");
+                            <%  String Str = new String("admin");
                                 if (session.getAttribute("login") != null) {
-                                    String logado = "admin@eventos.com";
+                                    String logado = "admin";
                                     if (session.getAttribute("login") != null && (logado.equals(session.getAttribute("login")))) {
                             %>                           
                         <li><a href="ad_eventolistarconsulta.jsp">*Eventos</a></li>
@@ -44,10 +44,11 @@
                             <%
                             } else {
                             %>
-                        <li><a href="login.jsp">Login</a></li>
+                        
                             <%
                                 }
                             %>                    
+                            <li><a href="login.jsp">Login</a></li>
                     </ul>
                 </div>
             </div>

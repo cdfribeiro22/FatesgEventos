@@ -50,6 +50,7 @@ public class EventosController extends HttpServlet {
         if (action.equalsIgnoreCase("imprime")) {                               //Imprime QRCode
             String CodigoEvento = request.getParameter("CodigoEvento");
             CreateQR imprimiQRcode = new CreateQR();
+            imprimiQRcode.QRMobile();
             forward = "ad_eventolistarconsultaQRcode.jsp";                          //devolver informação para esta pagina
             request.setAttribute("link", imprimiQRcode.QRcodeLink(CodigoEvento));   //devolver a informação para este link
 
@@ -59,6 +60,10 @@ public class EventosController extends HttpServlet {
 
         } else if (action.equalsIgnoreCase("listEventosConsulta")) {            //Lista Eventos para o ADMIN - TELA Imprime Lista e QRCODE
             forward = "ad_eventolistarconsulta.jsp";
+            request.setAttribute("eventos", daoE.getAllEvento());
+
+        } else if (action.equalsIgnoreCase("listEventosConsultaMobile")) {      //Lista Eventos para o MOBILE - TELA Imprime Lista e QRCODE
+            forward = "consultamobile.jsp";
             request.setAttribute("eventos", daoE.getAllEvento());
 
         } else if (action.equalsIgnoreCase("disponibilidade")) {                //Verifica se da do Evento está Disponível
@@ -107,8 +112,8 @@ public class EventosController extends HttpServlet {
 //                System.out.println("."+qrcodeA+"." + " - "+ "."+qrcodeB+".");
 //                 System.out.println(".");
         if (qrcodeA.equalsIgnoreCase(qrcodeB)) {
-            mensagem =  " ATENÇÃO!!! A Sala/Data/Horario informado ja possui uma reserva.Gentileza verificar a lista de eventos cadastrados!";
- String url = "ad_eventocadastrar_reservado.jsp";
+            mensagem = " ATENÇÃO!!! A Sala/Data/Horario informado ja possui uma reserva.Gentileza verificar a lista de eventos cadastrados!";
+            String url = "ad_eventocadastrar_reservado.jsp";
 //            response.sendRedirect(url);
 
         } else {
@@ -121,7 +126,7 @@ public class EventosController extends HttpServlet {
 
         RequestDispatcher view = request.getRequestDispatcher(URL_DEV);         //devolver informação para esta pagina
         request.setAttribute("valida", mensagem); //devolver informação para esta pagina
-         view.forward(request, response);
+        view.forward(request, response);
     }
 
     @Override

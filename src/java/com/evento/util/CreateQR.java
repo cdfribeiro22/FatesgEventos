@@ -23,7 +23,7 @@ public class CreateQR {
             //String linkValidaQrcode = "10.21.5.232"+":8080/E-ventos/CadastroController?action=listarCliente&CodigoCliente="+44;   //TESTE
             String linkValidaQrcode = "https://" + ip.getArpIp() + ":8181/FatesgEventos/RegistroController?action=registrarparticipante&QREvento=" + qrcode; //Correto
 
-            System.out.println("QRcode hostaddress " + ip.getArpIp());
+//            System.out.println("$CREATEQR$ QRcode hostaddress " + ip.getArpIp());
             System.out.println(linkValidaQrcode);
 
             int size = 300;
@@ -63,7 +63,7 @@ public class CreateQR {
             //String linkValidaQrcode = "10.21.5.232"+":8080/E-ventos/CadastroController?action=listarCliente&CodigoCliente="+44;   //TESTE
             String linkValidaQrcode = "https://" + ip.getArpIp() + ":8181/FatesgEventos/RegistroController?action=registrarparticipante&QREvento=" + qrcode; //Correto
 
-            System.out.println("QRcode hostaddress " + ip.getArpIp());
+//            System.out.println("QRcode hostaddress " + ip.getArpIp());
             System.out.println(linkValidaQrcode);
 
             int size = 300;
@@ -79,5 +79,45 @@ public class CreateQR {
 
         
         
+    }
+    
+    
+    
+    public void QRMobile() {
+        GetMACAddressIp ip  = new GetMACAddressIp();
+        try {
+
+            String linkValidaQrcode = "http://" + ip.getArpIp() + ":8080/FatesgEventos/consultamobile.jsp";
+
+            System.out.println("Qrcode Mobile: " + linkValidaQrcode);
+
+            int size = 300;
+            String nomeArquivo;
+//        if(hostaddress.substring(1, 10).equalsIgnoreCase("192.168.1")){
+
+            nomeArquivo = "C:\\Users\\Carlos Daniel\\Documents\\NetBeansProjects\\FatesgEventos\\web\\Qrcode\\" + "mobile.jpg";
+//        
+//        }else{
+//                
+//         nomeArquivo = "C:\\Users\\Carlos Daniel\\Documents\\NetBeansProjects\\FatesgEventos\\web\\Qrcode\\"+qrcode+".jpg";
+//        }
+            try {
+                FileOutputStream f = new FileOutputStream(nomeArquivo);
+                ByteArrayOutputStream out = QRCode.from(linkValidaQrcode).to(ImageType.JPG).withSize(size, size).stream();
+
+                f.write(out.toByteArray());
+                f.close();
+                System.out.println("OK");
+
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(CreateQR.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CreateQR.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreateQR.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

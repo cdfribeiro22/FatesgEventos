@@ -39,6 +39,14 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+        <style>
+            #map {
+                width: 50%;
+                height: 250px;
+                background-color: grey;
+            }
+        </style>
     </head><!--/head-->
 
     <body onload="getLocation()">
@@ -49,127 +57,151 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h1>Cadastrar Novo Evento</h1>
+                        <h1><strong>Cadastrar Novo Evento</strong></h1>
                     </div>
                 </div>
             </div>
         </section><!--/#title--> 
 
-        <form  name="form1" action='EventosController'   method="post" >
+
+        <div class="form-group">
+            <div class="col-md-7">
+                <form  name="form1" action='EventosController'   method="post" >
+
+                    <!-- DADOS PESSOAIS-->
+
+                    <legend> </legend>
+                    <table cellspacing="10" class="table">
+                        <!--     <tr>
+                                 <td>
+                                     <label for="fcodigoevento">Código do Evento </label>
+                                 </td>
+                                 <td align="left">
+                                     <input type="text" readonly="true" name="fcodigoevento" value="0" />
+                                 </td>
+                             </tr> 
+                        -->
+                        <tr>
+                            <td>
+                                <label for="Cregiao" >Descrição do Evento </label>
+                            </td>
+                            <td align="left">
+                                <input class="form-control" required type="text"  name="fdescevento" maxlength="55" size="70" value="<c:out value="${evento.getDescevento()}" />" /> 
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="fcodigo">Local do Evento </label>
+                            </td>
+                            <td align="left">
+                                <input class="form-control" required type="text"  maxlength="60" size="70" name="flocalevento" value="<c:out value="${evento.getLocalevento()}" />" />  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Ccategoria2">Sala/Auditorio</label>
+                            </td>
+                            <td align="left">
+                                <select name="fsala" required class="form-control"> 
+                                    <option value="">...</option> 
+                                    <option value="Sala_S101">Sala 101</option>
+                                    <option value="Sala_S102">Sala 102</option> 
+                                    <option value="Sala_S103">Sala 103</option> 
+                                    <option value="Sala_S104">Sala 104</option>
+                                    <option value="Sala_S105">Sala 105</option> 
+                                    <option value="Auditorio_AU01">Auditorio 01</option> 
+                                    <option value="Anfiteatro_AN01">Anfiteatro 01</option> 
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Cpencontro">Coordenadas Lat. </label>
+                            </td>
+                            <td align="left">
+                                <input class="form-control" required type="number" step = "any" name="flatitude" maxlength="10" size="10" id="fcoodx" value="<c:out value="${evento.getLatitude()}" />" /> 
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="Cpencontro">Coordenadas Long. </label>
+                            </td>
+                            <td align="left">
+                                <input class="form-control" required type="number" step = "any" maxlength="10" size="10" name="flongitude" id="fcoody"  value="<c:out value="${evento.getLongitude()}" />" /> 
+                            </td>
+                            <td align="left">
+                                <p id="geoerro">-</p>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label>Data do Evento </label>
+                            </td>
+                            <td align="left">
+                                <input class="form-control" required type="date"  name="fdataevento" value="<c:out value="${evento.getDataevento()}" />" />  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Ccategoria2">Horario</label>
+                            </td>
+                            <td align="left">
+                                <select name="fhoraevento" required class="form-control"> 
+                                    <option value="">...</option> 
+                                    <option value="7">07:00</option>
+                                    <option value="8">08:00</option> 
+                                    <option value="9">09:00</option> 
+                                    <option value="10">10:00</option>
+                                    <option value="11">11:00</option> 
+                                    <option value="12">12:00</option> 
+                                    <option value="13">13:00</option>
+                                    <option value="14">14:00</option> 
+                                    <option value="15">15:00</option> 
+                                    <option value="16">16:00</option>
+                                    <option value="17">17:00</option> 
+                                    <option value="18">18:00</option> 
+                                    <option value="19">19:00</option>
+                                    <option value="20">20:00</option> 
+                                    <option value="21">21:00</option> 
+                                    <option value="22">22:00</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                <p></p>
+                                <input type="submit" value="Cadastrar Evento" class="btn btn-default btn-large active">
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
 
 
 
-            <!-- DADOS PESSOAIS-->
-            <fieldset>
-                <legend>Evento: </legend>
-                <table cellspacing="10" class="text-center">
-                    <tr>
-                        <td>
-                            <label for="fcodigoevento">Código do Evento </label>
-                        </td>
-                        <td align="left">
-                            <input type="text" readonly="true" name="fcodigoevento" value="0" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="Cregiao">Descrição do Evento </label>
-                        </td>
-                        <td align="left">
-                            <input required type="text"  name="fdescevento" maxlength="55" size="70" value="<c:out value="${evento.getDescevento()}" />" /> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="fcodigo">Local do Evento </label>
-                        </td>
-                        <td align="left">
-                            <input required type="text"  maxlength="60" size="70" name="flocalevento" value="<c:out value="${evento.getLocalevento()}" />" />  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="Ccategoria2">Sala/Auditorio</label>
-                        </td>
-                        <td align="left">
-                            <select name="fsala" required> 
-                                <option value="">...</option> 
-                                <option value="Sala_S101">Sala 101</option>
-                                <option value="Sala_S102">Sala 102</option> 
-                                <option value="Sala_S103">Sala 103</option> 
-                                <option value="Sala_S104">Sala 104</option>
-                                <option value="Sala_S105">Sala 105</option> 
-                                <option value="Auditorio_AU01">Auditorio 01</option> 
-                                <option value="Anfiteatro_AN01">Anfiteatro 01</option> 
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="Cpencontro">Coordenadas Lat. </label>
-                        </td>
-                        <td align="left">
-                            <input required type="number" step = "any" name="flatitude" maxlength="10" size="10" id="fcoodx" value="<c:out value="${evento.getLatitude()}" />" /> 
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <label for="Cpencontro">Coordenadas Long. </label>
-                        </td>
-                        <td align="left">
-                            <input  required type="number" step = "any" maxlength="10" size="10" name="flongitude" id="fcoody"  value="<c:out value="${evento.getLongitude()}" />" /> 
-                        </td>
-                        <td align="left">
-                            <p id="geoerro">-</p>
-                        </td>
 
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <label>Data do Evento </label>
-                        </td>
-                        <td align="left">
-                            <input required type="date"  name="fdataevento" value="<c:out value="${evento.getDataevento()}" />" />  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="Ccategoria2">Horario</label>
-                        </td>
-                        <td align="left">
-                            <select name="fhoraevento" required> 
-                                <option value="">...</option> 
-                                <option value="7">07:00</option>
-                                <option value="8">08:00</option> 
-                                <option value="9">09:00</option> 
-                                <option value="10">10:00</option>
-                                <option value="11">11:00</option> 
-                                <option value="12">12:00</option> 
-                                <option value="13">13:00</option>
-                                <option value="14">14:00</option> 
-                                <option value="15">15:00</option> 
-                                <option value="16">16:00</option>
-                                <option value="17">17:00</option> 
-                                <option value="18">18:00</option> 
-                                <option value="19">19:00</option>
-                                <option value="20">20:00</option> 
-                                <option value="21">21:00</option> 
-                                <option value="22">22:00</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-            <br/>
+                </form>
+            </div>
+            <div class="col-md-5">           
 
-            <!--          <input type="button" onclick="location.href = 'EventoController?action=disponibilidade';" value="Reservar" />  -->
-            <label name="teste"></label>
-            <fieldset >
-                <input type="submit" value="Alterar/Incluir">
-            </fieldset>
-        </form>
+                <br/>    
+                <h3>Localização no mapa</h3>
+                <div id="map" ></div>  
+
+
+            </div>
+        </div>
+
+
 
 
 
@@ -208,13 +240,68 @@
                         break;
                 }
             }
+
+
+        </script>  
+
+        <script>
+            // Note: This example requires that you consent to location sharing when
+            // prompted by your browser. If you see the error "The Geolocation service
+            // failed.", it means you probably did not give permission for the browser to
+            // locate you.
+
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -34.397, lng: 150.644},
+                    zoom: 15
+                });
+                var infoWindow = new google.maps.InfoWindow({map: map});
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        map.setCenter(pos);
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+            }
         </script>
 
 
-
-
-
-
+        <!--
+                 <script>
+              function initMap() {
+                var uluru = {lat: -16.718, lng: -49.267};
+                var map = new google.maps.Map(document.getElementById('map'), {zoom: 15,center: uluru});
+                var marker = new google.maps.Marker({
+                  position: uluru,
+                  map: map
+                });
+              }
+            </script>
+        -->    
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxkumZvr9d2FFH73PER2-73vaQlX44a0Q&callback=initMap">
+        </script>
     </body>
+
 </html>
 
